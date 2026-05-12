@@ -83,47 +83,34 @@ Aquí tienes el desglose detallado de cómo se conectan tus campos con la lógic
 
 ---
 
-## 🗄️ 3.2. Diseño de Base de Datos (Tablas y Campos)
+## 🗄️ 3.2. Diccionario de Datos (Estructura de Tablas)
 
-Para que **Eventos Ortega** funcione, transformamos tu relacional de SQL a colecciones de documentos en Firestore, respetando cada uno de tus campos originales:
+A continuación, se detalla la transposición de tu lógica relacional a documentos de Firestore. Estas tablas representan el corazón de la base de datos de **Eventos Ortega**:
 
-### **Colecciones Principales**
+### **Módulo de Planificación y Usuarios**
 
-* **`proyectos`**: Contiene la raíz de cada evento.
-* *Campos:* `id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `estado`, `presupuesto_total`.
+| Entidad | Campos Principales | Propósito |
+| --- | --- | --- |
+| **Proyectos** | `id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `estado`, `presupuesto_total` | La raíz de cada evento gestionado. |
+| **Categorías** | `id`, `proyecto_id`, `nombre`, `tipo`, `color` | Clasificación interna (ej. Banquete, Sonido). |
+| **Usuarios** | `id`, `nombre`, `email`, `rol` | Control de acceso (Admin/Organizador). |
 
+### **Módulo Financiero y de Cuentas**
 
-* **`categorias`**: Clasificación de gastos y tipos de eventos.
-* *Campos:* `id`, `proyecto_id` (relación), `nombre`, `tipo`, `color` (usaremos tonos Morado/Rosa).
+| Entidad | Campos Principales | Propósito |
+| --- | --- | --- |
+| **Cuentas** | `id`, `proyecto_id`, `nombre`, `tipo`, `moneda`, `saldo_inicial`, `saldo_actual` | Origen y destino de los fondos. |
+| **Transacciones** | `id`, `cuenta_origen_id`, `cuenta_destino_id`, `categoria_id`, `usuario_id`, `monto`, `fecha`, `tipo`, `descripcion`, `estado` | Registro histórico de movimientos de dinero. |
+| **Presupuestos** | `id`, `proyecto_id`, `categoria_id`, `monto_planificado`, `monto_ejecutado`, `periodo_inicio`, `periodo_fin` | Control de gastos vs. lo planeado. |
 
+### **Módulo Administrativo y de Soporte**
 
-* **`cuentas`**: Fondos disponibles para la empresa.
-* *Campos:* `id`, `proyecto_id`, `nombre`, `tipo` (ahorro/corriente), `moneda`, `saldo_inicial`, `saldo_actual`.
-
-
-* **`usuarios`**: Perfiles de acceso.
-* *Campos:* `id`, `nombre`, `email`, `rol` (admin/organizador).
-
-
-* **`transacciones`**: El flujo de dinero en tiempo real.
-* *Campos:* `id`, `cuenta_origen_id`, `cuenta_destino_id`, `categoria_id`, `usuario_id`, `monto`, `fecha`, `tipo` (ingreso/egreso), `descripcion`, `estado`.
-
-
-* **`presupuestos`**: Control de lo planificado vs lo real.
-* *Campos:* `id`, `proyecto_id`, `categoria_id`, `monto_planificado`, `monto_ejecutado`, `periodo_inicio`, `periodo_fin`.
-
-
-* **`proveedores`**: Directorio de servicios externos.
-* *Campos:* `id`, `nombre`, `rfc`, `contacto`, `moneda`.
-
-
-* **`facturas`**: Soporte legal de los movimientos.
-* *Campos:* `id`, `proveedor_id`, `transaccion_id`, `numero`, `fecha_emision`, `fecha_vencimiento`, `monto_total`, `estado` (pagada/pendiente).
-
-
+| Entidad | Campos Principales | Propósito |
+| --- | --- | --- |
+| **Proveedores** | `id`, `nombre`, `rfc`, `contacto`, `moneda` | Directorio de empresas externas. |
+| **Facturas** | `id`, `proveedor_id`, `transaccion_id`, `numero`, `fecha_emision`, `fecha_vencimiento`, `monto_total`, `estado` | Respaldo legal y fiscal de cada gasto. |
 
 ---
-
 
 ## 5. Planeación del Desarrollo (Paso a Paso). Gestion de estado con Providers
 
@@ -195,6 +182,38 @@ Aquí tienes la versión adaptada para tu plan profesional:
 ---
 
 ## 6. Recursos y Herramientas de Integración
+
+## 📦 6. Dependencias Recomendadas (`pubspec.yaml`)
+
+Para que el proyecto compile correctamente en todas las plataformas, añade estas librerías en tu archivo de configuración. He respetado los colores y el formato de código solicitado:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # --- NÚCLEO Y CONECTIVIDAD CLOUD ---
+  firebase_core: ^2.24.0      # Inicialización de servicios Google
+  firebase_auth: ^4.15.0      # Gestión de usuarios y sesiones
+  cloud_firestore: ^4.13.0    # Base de datos NoSQL en tiempo real
+  firebase_storage: ^11.5.0   # Almacenamiento de facturas y fotos
+  
+  # --- GESTIÓN DE ESTADO Y RUTAS ---
+  provider: ^6.1.1            # Arquitecto de estado (MVVM)
+  go_router: ^12.1.3          # Enrutador para Web, Móvil y Desktop
+  
+  # --- UTILIDADES Y FORMATO ---
+  intl: ^0.18.1               # Formateo de moneda ($) y fechas
+  google_fonts: ^6.1.0        # Tipografías Montserrat / Poppins
+  cached_network_image: ^3.3.0 # Caché inteligente de imágenes
+  fl_chart: ^0.65.0           # Gráficas financieras (Morado/Rosa)
+  
+  # --- ADICIONALES ---
+  logger: ^2.0.2              # Depuración profesional en consola
+
+```
+
+---
 
 Para que **Eventos Ortega** funcione con la fluidez y seguridad que requiere un negocio de logística, utilizaremos una selección de librerías especializadas que se dividen en cuatro pilares fundamentales:
 
@@ -270,3 +289,4 @@ Para que **Eventos Ortega** funcione con la fluidez y seguridad que requiere un 
 
 
 ### Edna Paola Ortega Rodriguez 6J
+

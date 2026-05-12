@@ -116,25 +116,40 @@ La identidad visual de **Eventos Ortega** debe transmitir creatividad y profesio
 
 ---
 
-## 6. Dependencias Recomendadas
+Perfecto, entiendo. Vamos a transformar esa sección técnica en una descripción narrativa y estratégica, explicando la utilidad de cada herramienta sin usar el formato de archivo de configuración.
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  firebase_core: ^latest      # Conexión base
-  firebase_auth: ^latest      # Usuarios
-  cloud_firestore: ^latest    # Base de datos
-  firebase_storage: ^latest   # Archivos/Facturas
-  provider: ^latest           # Estado
-  intl: ^latest               # Formato de dinero ($) y fechas
-  google_fonts: ^latest       # Tipografía profesional
-  cached_network_image: ^latest # Optimización de fotos de eventos
-  go_router: ^latest          # Navegación avanzada
-
-```
+Aquí tienes la versión adaptada para tu plan profesional:
 
 ---
+
+## 6. Recursos y Herramientas de Integración
+
+Para que **Eventos Ortega** funcione con la fluidez y seguridad que requiere un negocio de logística, utilizaremos una selección de librerías especializadas que se dividen en cuatro pilares fundamentales:
+
+### A. Núcleo y Conectividad Cloud
+
+* **Conector Base de Firebase:** Es el cimiento que permite que la aplicación "hable" con los servicios de Google en la nube.
+* **Gestor de Identidad:** Herramienta encargada de cifrar las contraseñas, manejar el inicio de sesión y asegurar que cada usuario sea quien dice ser.
+* **Motor de Datos en Tiempo Real:** La base de datos que permite que, si un administrador registra un pago en la oficina, el organizador lo vea reflejado al instante en su móvil.
+* **Almacén de Archivos Digitales:** Espacio seguro en la nube diseñado para guardar las fotos de los eventos y los archivos PDF de las facturas y contratos.
+
+### B. Gestión de Inteligencia y Estado
+
+* **Arquitecto de Estado (Provider):** Es el director de orquesta de la aplicación; se encarga de que la información (como el saldo de una cuenta) fluya entre pantallas sin perderse ni duplicarse.
+* **Enrutador Avanzado:** Sistema que gestiona los caminos de la app, permitiendo crear rutas protegidas (que nadie entre al área de finanzas sin permiso) y facilitando la navegación entre el catálogo y el dashboard.
+
+### C. Formateo y Profesionalización de Datos
+
+* **Localización Internacional (Intl):** Vital para el negocio. Se encarga de transformar números simples en formato de moneda ($) y fechas legibles según el calendario del evento.
+* **Gestor de Tipografía:** Integración de fuentes modernas (como *Poppins* o *Montserrat*) para que la app no parezca un sistema genérico, sino una herramienta de diseño de eventos.
+
+### D. Optimización Visual y Rendimiento
+
+* **Caché Inteligente de Imágenes:** Permite que las fotos de los salones o decoraciones se carguen una sola vez y se guarden en la memoria del teléfono, ahorrando datos móviles a los usuarios.
+* **Librería de Gráficos:** Para el módulo financiero, utilizaremos herramientas que transforman las tablas de gastos en gráficas de pastel y barras, facilitando la toma de decisiones sobre los presupuestos.
+
+---
+
 
 ## 7. Seguridad y Autenticación
 

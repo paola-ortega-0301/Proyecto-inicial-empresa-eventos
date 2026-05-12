@@ -77,23 +77,64 @@ lib/
 * **Dependencias Clave:** `cloud_firestore`, `firebase_auth`, `intl` (fechas/monedas), `google_fonts`, `fl_chart` (gráficas financieras).
 
 ---
+Entendido. He integrado la lógica de tus tablas originales de SQL (Proyecto, Categoría, Cuenta, Usuario, Transacción, Presupuesto, Proveedor y Factura) dentro de la arquitectura de **Providers** y la estructura de **Firestore**.
 
-## 4. Diseño UI/UX
-
-La identidad visual de **Eventos Ortega** debe transmitir creatividad y profesionalismo.
-
-* **Paleta de Colores:**
-* **Primario:** Morado Profundo (`#673AB7`) - Representa elegancia y creatividad.
-* **Secundario:** Rosa Vibrante (`#E91E63`) - Representa energía y pasión por los eventos.
-* **Acento:** Blanco/Gris claro para fondos, asegurando legibilidad.
-
-
-* **Estilo Visual:** Neomorfismo suave o Glassmorphism en tarjetas de eventos, bordes redondeados y tipografía moderna (tipo *Montserrat* o *Poppins*).
-* **Responsive:** Diseño adaptativo que utiliza `LayoutBuilder` para mostrar paneles laterales en escritorio y barras inferiores en móviles.
+Aquí tienes el desglose detallado de cómo se conectan tus campos con la lógica de estado de la aplicación:
 
 ---
 
-## 5. Planeación del Desarrollo (Paso a Paso)
+## 🗄️ 3.2. Diseño de Base de Datos (Tablas y Campos)
+
+Para que **Eventos Ortega** funcione, transformamos tu relacional de SQL a colecciones de documentos en Firestore, respetando cada uno de tus campos originales:
+
+### **Colecciones Principales**
+
+* **`proyectos`**: Contiene la raíz de cada evento.
+* *Campos:* `id`, `nombre`, `descripcion`, `fecha_inicio`, `fecha_fin`, `estado`, `presupuesto_total`.
+
+
+* **`categorias`**: Clasificación de gastos y tipos de eventos.
+* *Campos:* `id`, `proyecto_id` (relación), `nombre`, `tipo`, `color` (usaremos tonos Morado/Rosa).
+
+
+* **`cuentas`**: Fondos disponibles para la empresa.
+* *Campos:* `id`, `proyecto_id`, `nombre`, `tipo` (ahorro/corriente), `moneda`, `saldo_inicial`, `saldo_actual`.
+
+
+* **`usuarios`**: Perfiles de acceso.
+* *Campos:* `id`, `nombre`, `email`, `rol` (admin/organizador).
+
+
+* **`transacciones`**: El flujo de dinero en tiempo real.
+* *Campos:* `id`, `cuenta_origen_id`, `cuenta_destino_id`, `categoria_id`, `usuario_id`, `monto`, `fecha`, `tipo` (ingreso/egreso), `descripcion`, `estado`.
+
+
+* **`presupuestos`**: Control de lo planificado vs lo real.
+* *Campos:* `id`, `proyecto_id`, `categoria_id`, `monto_planificado`, `monto_ejecutado`, `periodo_inicio`, `periodo_fin`.
+
+
+* **`proveedores`**: Directorio de servicios externos.
+* *Campos:* `id`, `nombre`, `rfc`, `contacto`, `moneda`.
+
+
+* **`facturas`**: Soporte legal de los movimientos.
+* *Campos:* `id`, `proveedor_id`, `transaccion_id`, `numero`, `fecha_emision`, `fecha_vencimiento`, `monto_total`, `estado` (pagada/pendiente).
+
+
+
+---
+
+
+## 5. Planeación del Desarrollo (Paso a Paso). Gestion de estado con Providers
+
+El **Provider** actuará como el motor que mantiene los datos actualizados en las pantallas moradas y rosas de la interfaz.
+
+### **1. EventProvider (Gestión de Proyectos)**
+
+Es el encargado de administrar la lógica de los eventos.
+
+* **Funciones:** Listar proyectos activos, filtrar por fecha y actualizar el estado del evento (planeación, en curso, finalizado).
+* **Uso en UI:** Alimenta el Dashboard principal con los nombres de los proyectos y sus fechas de inicio/fin.
 
 ### Fase 1 — Configuración del Entorno
 

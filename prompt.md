@@ -20,11 +20,42 @@ Para garantizar la escalabilidad en Android, iOS, Web y Desktop, utilizaremos un
 
 ```text
 lib/
-├── core/            # Constantes, temas, utilidades y rutas.
-├── data/            # Repositorios, fuentes de datos (Firebase) y DTOs.
-├── domain/          # Entidades puras y casos de uso (reglas de negocio).
-├── providers/       # Gestión de estado (ViewModels).
-└── ui/              # Capa de presentación (Screens y Widgets).
+├── core/
+│   ├── constants/       # Nombres de colecciones de Firebase y llaves API.
+│   ├── theme/           # Configuración de colores (Morado/Rosa) y tipografías.
+│   ├── routes/          # Configuración centralizada de navegación (GoRouter).
+│   ├── utils/           # Formateadores de moneda ($) y validadores de formularios.
+│   └── errors/          # Manejo de excepciones personalizadas.
+│
+├── data/
+│   ├── models/          # DTOs (Data Transfer Objects) con métodos de/hacia JSON.
+│   ├── repositories/    # Implementación de los contratos de datos.
+│   └── services/        # Conexiones directas a Firebase Auth, Firestore y Storage.
+│
+├── domain/
+│   ├── entities/        # Clases de datos puras (sin lógica de Firebase).
+│   ├── repositories/    # Interfaces y contratos que definen el acceso a datos.
+│   └── usecases/        # Lógica de negocio (ej. InscribirAsistente, CalcularPresupuesto).
+│
+├── providers/
+│   ├── auth_provider.dart    # Estado de la sesión del usuario y roles.
+│   ├── event_provider.dart   # Estado de la lista de eventos y filtros.
+│   └── finance_provider.dart # Estado de cuentas, transacciones y presupuestos.
+│
+├── features/            # Módulos específicos por funcionalidad
+│   ├── auth/            # Pantallas de Login, Registro y Recuperación.
+│   ├── events/          # Pantallas de Catálogo, Detalles y Gestión de Cupos.
+│   ├── finance/         # Pantallas de Cuentas, Historial y Gráficas de Gastos.
+│   └── billing/         # Pantallas de Proveedores y Visualización de Facturas.
+│
+├── ui/
+│   ├── shared/          # Widgets reutilizables (Botones Rosa, Cards Moradas).
+│   └── layouts/         # Estructuras base para Móvil vs Web/Desktop.
+│
+└── assets/
+    ├── images/          # Logotipos y fondos de la empresa.
+    ├── icons/           # Iconografía para categorías de eventos.
+    └── fonts/           # Archivos de fuentes (Montserrat, Poppins).
 
 ```
 

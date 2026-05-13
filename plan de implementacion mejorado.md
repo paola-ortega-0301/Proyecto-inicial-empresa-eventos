@@ -33,34 +33,41 @@ Aquí tienes el plan de implementación detallado para tu proyecto **"Eventos Or
 
 ---
 
-## 🏗️ 1. Arquitectura de Carpetas (Clean Architecture)
+Comprendo perfectamente. Si prefieres que la estructura de tu proyecto sea totalmente en español para que sea más intuitiva para ti o para tu equipo, aquí tienes la **Arquitectura de Carpetas (Arquitectura Limpia)** traducida exactamente igual, manteniendo la organización profesional:
 
-Para que el proyecto sea profesional, utilizaremos una estructura de **capas independientes**. Esto permite que si mañana decides cambiar Firebase por otra base de datos, el impacto en la interfaz sea mínimo.
+---
+
+## 🏗️ 1. Arquitectura de Carpetas (Arquitectura Limpia)
+
+Para que el proyecto sea profesional, utilizaremos una estructura de capas independientes. Esto permite que si mañana decides cambiar Firebase por otra base de datos, el impacto en la interfaz sea mínimo.
 
 ```text
 lib/
-├── core/                        # Utilidades globales y constantes
-│   ├── constants/               # Colores, strings, rutas
-│   ├── errors/                  # Manejo de excepciones personalizadas
-│   └── theme/                   # Configuración de Dark/Light mode
-├── data/                        # LA CAPA DE DATOS (Implementación)
-│   ├── datasources/             # Conexión directa con Firebase (Remote)
-│   ├── models/                  # Tus tablas SQL convertidas a Clases Dart
-│   └── repositories_impl/       # Implementación de la lógica de datos
-├── domain/                      # LA CAPA DE NEGOCIO (Reglas)
-│   ├── entities/                # Objetos puros de negocio
-│   └── repositories/            # Contratos (Interfaces)
-├── providers/                   # GESTIÓN DE ESTADO (Logic)
-│   ├── auth_provider.dart       # Login, Registro, Roles
-│   ├── event_provider.dart      # Lista de eventos y filtros
-│   └── payment_provider.dart    # Inscripciones y validación de pagos
-├── ui/                          # LA CAPA DE PRESENTACIÓN (UI)
-│   ├── screens/                 # Pantallas completas (Home, Admin, Details)
+├── nucleo/                      # Utilidades globales y constantes
+│   ├── constantes/              # Colores, cadenas de texto (strings), rutas
+│   ├── errores/                 # Manejo de excepciones personalizadas
+│   └── tema/                    # Configuración de modo Claro/Oscuro
+├── datos/                       # LA CAPA DE DATOS (Implementación)
+│   ├── fuentes_de_datos/        # Conexión directa con Firebase (Remoto)
+│   ├── modelos/                 # Tus tablas SQL convertidas a Clases Dart
+│   └── impl_repositorios/       # Implementación de la lógica de datos
+├── dominio/                     # LA CAPA DE NEGOCIO (Reglas)
+│   ├── entidades/               # Objetos puros de negocio
+│   └── repositorios/            # Contratos (Interfaces)
+├── proveedores/                 # GESTIÓN DE ESTADO (Lógica)
+│   ├── proveedor_auth.dart      # Inicio de sesión, Registro, Roles
+│   ├── proveedor_eventos.dart   # Lista de eventos y filtros
+│   └── proveedor_pagos.dart     # Inscripciones y validación de pagos
+├── ui/                          # LA CAPA DE PRESENTACIÓN (Interfaz)
+│   ├── pantallas/               # Pantallas completas (Inicio, Admin, Detalles)
 │   ├── widgets/                 # Componentes pequeños y reutilizables
-│   └── layouts/                 # Estructuras de página (Scaffolds)
+│   └── diseños/                 # Estructuras de página (Scaffolds)
 └── main.dart                    # Punto de entrada
 
 ```
+
+---
+
 
 
 

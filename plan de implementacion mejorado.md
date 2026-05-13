@@ -37,7 +37,7 @@ Comprendo perfectamente. Si prefieres que la estructura de tu proyecto sea total
 
 ---
 
-## 🏗️ 1. Arquitectura de Carpetas (Arquitectura Limpia)
+## 🏗️ 2. Arquitectura de Carpetas (Arquitectura Limpia)
 
 Para que el proyecto sea profesional, utilizaremos una estructura de capas independientes. Esto permite que si mañana decides cambiar Firebase por otra base de datos, el impacto en la interfaz sea mínimo.
 

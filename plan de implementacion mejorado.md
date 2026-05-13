@@ -194,7 +194,7 @@ Debes añadir estas librerías en tu archivo `pubspec.yaml`.
 
 ---
 
-# 📦 Catálogo de Dependencias (Stack Tecnológico)
+# 6. 📦 Catálogo de Dependencias (Stack Tecnológico)
 
 ### 1. Núcleo de Firebase (Infraestructura)
 
